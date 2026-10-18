@@ -1,0 +1,31 @@
+Saya mempunyai ide untuk membuat website profile Rumah Belajar Quran (RBQ Al Fatih) dan ada modul untuk login untuk masuk ke aplikasi RBQ yang di dalam nya ada beberapa module lagi.
+
+modul profile website  berisi  profile RBQ al fatih, tentang kami (pengajaran di RBQ Al fatih menggunakan metode ummi ),visi misi, info pendaftaran, event dan berita, kontak (ada map https://maps.app.goo.gl/6aJ7jQ7tJwVJyrQF7),  tampilan responsive di HP maupun di laptop,
+
+Modul Santri digunakan untuk menambah santri baru, profile santri, santri keluar.
+perubahan jilid santri tercatat di sistem, sehingga saat mau melihat santri di tahun ajaran tertentu bisa terlihat. 
+untuk kelompok di rbq ada kelompok :
+- Pra Ummi
+- Jilid 1
+- Jilid 2
+- Jilid 3 
+- Jilid 4 
+- Jilid 5 
+- Jilid 6
+1 kelompok bisa terdiri dari beberapa kelas, di tiap kelas mempunyai  1 orang wali kelas dan tiap tahun ajaran baru bisa berubah
+   
+
+Modul Kas digunakan untuk :
+pembayaran santri, dilakukan tiap bulan dan dibayarkan ke wali kelas, wali kelas menginput setiap ada yang bayaran, dan di akhir bulan akan di setorkan ke kas utama, pembayaran terdiri dari 3 kategori (SPP, Infaq, dan tabungan) SPP bersifat tetap nominalnya, infaq bebas nominalnya, dan tabungan bebas nominal nya tp tabungan ini nanti dpt diambil oleh santri
+selain dari pembayaran siswa, pendapatan juga bisa di dapat dari donatur yang nominal nya bebas, dan nanti akan bergabung dengan infaq dari pembayaran siswa
+
+Pengeluaran, seperti Pembayaran Bisyaroh guru (diambil dari kategori spp) , bayar kas ke pokja, pembelian buku dll(diambil dari infaq) ini dilakukan di kas utama
+
+Modul Tabungan digunakan untuk menghimpun tabungan dari para santri yang diterima saat pembayaran santri, dan bisa diambil kembali oleh santri. disini kitabisa melihat transaksi tabungan masuk dan pengambilan tabungan serta sisa tabungan setiap santri
+
+Modul Raport digunakan untuk menginput nilai santri di tiap pertemuan perbulan, dan nanti dari nilai itu akan dibuat ledger nilai,dari ladger nilai ini akan dibuat menjadi raport.
+di raport ada tambahan penilaian kepribadian(tertib, disiplin,motivasi belajar) dengan nilai A,B,C,D.
+ada juga informasi absensi dalam 1 semester tersebut (sakit, izin dan tanpa keterangan)
+ada juga informasi peringkat yang di dapat dari ledger nilai
+
+dari kebutuhan diatas buatkan PRD nya
