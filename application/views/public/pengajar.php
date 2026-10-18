@@ -267,9 +267,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const id = this.getAttribute('data-id');
             if (!id) return;
 
-            // Fetch detail pengajar via AJAX
-            fetch('<?= base_url("profil/ajax_detail_pengajar/"); ?>' + id)
-                .then(response => response.json())
+            // Fetch detail pengajar via AJAX (menggunakan route resmi pengajar/detail/)
+            const ajaxUrl = '<?= base_url("pengajar/detail/"); ?>' + id;
+            
+            fetch(ajaxUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Server mengembalikan status: ' + response.status + ' (' + response.statusText + ')');
+                    }
+                    return response.json();
+                })
                 .then(res => {
                     if (res.status === 'success') {
                         const data = res.data;
@@ -324,8 +331,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 })
                 .catch(err => {
-                    console.error('Error fetching detail pengajar:', err);
-                    alert('Terjadi kesalahan saat memuat data profil pengajar.');
+                    console.error('Error fetching detail pengajar from ' + ajaxUrl + ':', err);
+                    alert('Gagal memuat profil: ' + err.message + '\nPeriksa koneksi atau console browser.');
                 });
         });
     });
