@@ -95,9 +95,13 @@ class Dashboard extends MY_Controller
         $tabungan_keluar = $this->db->select_sum('nominal')->where('tipe', 'keluar')->get('transaksi_tabungan')->row()->nominal ?? 0;
         $saldo_tabungan  = $tabungan_masuk - $tabungan_keluar;
 
+        // Total tenaga pengajar aktif
+        $total_pengajar  = $this->db->where('is_active', 1)->count_all_results('pengajar');
+
         return [
             'total_santri'   => (int)$total_santri,
             'total_kelas'    => (int)$total_kelas,
+            'total_pengajar' => (int)$total_pengajar,
             'saldo_spp'      => (float)$saldo_spp,
             'saldo_infaq'    => (float)$saldo_infaq,
             'saldo_tabungan' => (float)$saldo_tabungan

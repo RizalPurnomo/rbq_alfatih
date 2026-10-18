@@ -105,6 +105,9 @@ $role = $this->session->userdata('role');
             <a href="<?= base_url('tahun_ajaran'); ?>" class="btn btn-outline-secondary rounded-pill px-3 btn-sm">
                 <i class="fa-solid fa-calendar-plus me-1"></i> Atur Semester
             </a>
+            <a href="<?= base_url('pengajar_admin'); ?>" class="btn btn-outline-info rounded-pill px-3 btn-sm">
+                <i class="fa-solid fa-chalkboard-user me-1"></i> Profil Pengajar (Asatidz)
+            </a>
             <a href="<?= base_url('users'); ?>" class="btn btn-outline-dark rounded-pill px-3 btn-sm">
                 <i class="fa-solid fa-user-gear me-1"></i> Manajemen Pengguna
             </a>

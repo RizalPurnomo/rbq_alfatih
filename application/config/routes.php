@@ -84,4 +84,10 @@ $route['berita_admin']                 = 'Berita_admin/index';
 $route['berita_admin/(:any)']          = 'Berita_admin/$1';
 $route['berita_admin/(:any)/(:any)']   = 'Berita_admin/$1/$2';
 
+// Pengajar Admin Routes
+$route['pengajar_admin']               = 'Pengajar_admin/index';
+$route['pengajar_admin/(:any)']        = 'Pengajar_admin/$1';
+$route['pengajar_admin/(:any)/(:any)'] = 'Pengajar_admin/$1/$2';
+
+
 

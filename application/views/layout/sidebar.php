@@ -69,6 +69,12 @@ $active_menu = isset($active_menu) ? $active_menu : '';
                 </a>
             </li>
             <li>
+                <a href="<?= base_url('pengajar_admin'); ?>" class="sidebar-link <?= ($active_menu === 'pengajar_admin') ? 'active' : ''; ?>">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>Profil Pengajar</span>
+                </a>
+            </li>
+            <li>
                 <a href="<?= base_url('berita_admin'); ?>" class="sidebar-link <?= ($active_menu === 'berita_admin') ? 'active' : ''; ?>">
                     <i class="fa-solid fa-newspaper"></i>
                     <span>Event & Berita</span>
