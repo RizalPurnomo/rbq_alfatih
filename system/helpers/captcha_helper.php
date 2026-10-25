@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2019 - 2022, CodeIgniter Foundation
+ * Copyright (c) 2014 - 2018, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,9 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @copyright	Copyright (c) 2019 - 2022, CodeIgniter Foundation (https://codeigniter.com/)
- * @license	https://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -45,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Helpers
  * @category	Helpers
  * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/userguide3/helpers/captcha_helper.html
+ * @link		https://codeigniter.com/user_guide/helpers/captcha_helper.html
  */
 
 // ------------------------------------------------------------------------
@@ -95,21 +94,10 @@ if ( ! function_exists('create_captcha'))
 			}
 		}
 
-		if ( ! extension_loaded('gd'))
+		if ($img_path === '' OR $img_url === ''
+			OR ! is_dir($img_path) OR ! is_really_writable($img_path)
+			OR ! extension_loaded('gd'))
 		{
-			log_message('error', 'create_captcha(): GD extension is not loaded.');
-			return FALSE;
-		}
-
-		if ($img_path === '' OR $img_url === '')
-		{
-			log_message('error', 'create_captcha(): $img_path and $img_url are required.');
-			return FALSE;
-		}
-
-		if ( ! is_dir($img_path) OR ! is_really_writable($img_path))
-		{
-			log_message('error', "create_captcha(): '{$img_path}' is not a dir, nor is it writable.");
 			return FALSE;
 		}
 
@@ -240,14 +228,14 @@ if ( ! function_exists('create_captcha'))
 		// -----------------------------------
 		$length	= strlen($word);
 		$angle	= ($length >= 6) ? mt_rand(-($length-6), ($length-6)) : 0;
-		$x_axis	= mt_rand(6, (360/$length)-16);
-		$y_axis = ($angle >= 0) ? mt_rand($img_height, $img_width) : mt_rand(6, $img_height);
+		$x_axis	= mt_rand(6, (int) ((360/$length)-16));
+		$y_axis = ($angle >= 0) ? mt_rand((int) $img_height, (int) $img_width) : mt_rand(6, (int) $img_height);
 
 		// Create image
 		// PHP.net recommends imagecreatetruecolor(), but it isn't always available
 		$im = function_exists('imagecreatetruecolor')
-			? imagecreatetruecolor($img_width, $img_height)
-			: imagecreate($img_width, $img_height);
+			? imagecreatetruecolor((int) $img_width, (int) $img_height)
+			: imagecreate((int) $img_width, (int) $img_height);
 
 		// -----------------------------------
 		//  Assign colors
@@ -263,7 +251,7 @@ if ( ! function_exists('create_captcha'))
 		}
 
 		// Create the rectangle
-		ImageFilledRectangle($im, 0, 0, $img_width, $img_height, $colors['background']);
+		ImageFilledRectangle($im, 0, 0, (int) $img_width, (int) $img_height, $colors['background']);
 
 		// -----------------------------------
 		//  Create the spiral pattern
@@ -278,12 +266,12 @@ if ( ! function_exists('create_captcha'))
 		{
 			$theta += $thetac;
 			$rad = $radius * ($i / $points);
-			$x = ($rad * cos($theta)) + $x_axis;
-			$y = ($rad * sin($theta)) + $y_axis;
+			$x = (int) (($rad * cos($theta)) + $x_axis);
+			$y = (int) (($rad * sin($theta)) + $y_axis);
 			$theta += $thetac;
 			$rad1 = $radius * (($i + 1) / $points);
-			$x1 = ($rad1 * cos($theta)) + $x_axis;
-			$y1 = ($rad1 * sin($theta)) + $y_axis;
+			$x1 = (int) (($rad1 * cos($theta)) + $x_axis);
+			$y1 = (int) (($rad1 * sin($theta)) + $y_axis);
 			imageline($im, $x, $y, $x1, $y1, $colors['grid']);
 			$theta -= $thetac;
 		}
@@ -296,13 +284,13 @@ if ( ! function_exists('create_captcha'))
 		if ($use_font === FALSE)
 		{
 			($font_size > 5) && $font_size = 5;
-			$x = mt_rand(0, $img_width / ($length / 3));
+			$x = mt_rand(0, (int) ($img_width / ($length / 3)));
 			$y = 0;
 		}
 		else
 		{
 			($font_size > 30) && $font_size = 30;
-			$x = mt_rand(0, $img_width / ($length / 1.5));
+			$x = mt_rand(0, (int) ($img_width / ($length / 1.5)));
 			$y = $font_size + 2;
 		}
 
@@ -310,14 +298,14 @@ if ( ! function_exists('create_captcha'))
 		{
 			if ($use_font === FALSE)
 			{
-				$y = mt_rand(0 , $img_height / 2);
-				imagestring($im, $font_size, $x, $y, $word[$i], $colors['text']);
+				$y = mt_rand(0 , (int) ($img_height / 2));
+				imagestring($im, (int) $font_size, (int) $x, (int) $y, $word[$i], $colors['text']);
 				$x += ($font_size * 2);
 			}
 			else
 			{
-				$y = mt_rand($img_height / 2, $img_height - 3);
-				imagettftext($im, $font_size, $angle, $x, $y, $colors['text'], $font_path, $word[$i]);
+				$y = mt_rand((int) ($img_height / 2), (int) ($img_height - 3));
+				imagettftext($im, $font_size, $angle, (int) $x, (int) $y, $colors['text'], $font_path, $word[$i]);
 				$x += $font_size;
 			}
 		}
@@ -345,8 +333,11 @@ if ( ! function_exists('create_captcha'))
 			return FALSE;
 		}
 
-		$img = '<img '.($img_id === '' ? '' : 'id="'.$img_id.'"').' src="'.$img_url.$img_filename.'" style="width: '.$img_width.'px; height: '.$img_height .'px; border: 0;" alt=" " />';
-		ImageDestroy($im);
+		$img = '<img '.($img_id === '' ? '' : 'id="'.$img_id.'"').' src="'.$img_url.$img_filename.'" style="width: '.$img_width.'; height: '.$img_height .'; border: 0;" alt=" " />';
+		if (PHP_VERSION_ID < 80000)
+		{
+			ImageDestroy($im);
+		}
 
 		return array('word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
 	}
